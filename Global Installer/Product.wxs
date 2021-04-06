@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="*" Name="Somaris" Language="1033" Version="1.0.0.0" Manufacturer="Martin Dennhardt" UpgradeCode="bc8761f6-05a0-4139-bd30-e7a389ba6ed1">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <util:CloseApplication Target="notepad.exe"
+                           PromptToContinue="yes"
+                           Description="notepad.exe has to be closed for this installation to continue.">
+      NOT Installed
+    </util:CloseApplication>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg" Order="2">1</Publish>
+      <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">1</Publish>
+    </UI>
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name=".">
+        <Directory Id="INSTALLDIR" Name="Somaris">
+          <Directory Id="IntroToWix" Name="IntroToWix">
+            <Merge Id="IntroToWix" Language="1033" SourceFile="$(var.IntroToWix.Package.TargetDir)\IntroToWix.msm" DiskId="1" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="IntroToWix" Level="1">
+      <MergeRef Id="IntroToWix" />
+    </Feature>
+
+    <CustomAction Id="SampleCustomAction" BinaryKey="SampleCustomAction" DllEntry="CustomAction1" Execute="immediate" Return="check" />
+    <Binary Id="SampleCustomAction" SourceFile="$(var.SampleCustomAction.TargetDir)\SampleCustomAction.CA.dll" />
+    <InstallExecuteSequence>
+      <Custom Action="SampleCustomAction" After="InstallFiles" />
+    </InstallExecuteSequence>
+  </Product>
+</Wix>

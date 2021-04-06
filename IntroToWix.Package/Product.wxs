@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Module Id="IntroToWix"
+           Language="1033"
+           Version="1.0.2.0">
+    <Package Id="D10FBC85-617E-4E04-BA23-0612C7A68121"
+             InstallerVersion="200"
+             InstallScope="perMachine"
+             Manufacturer="Martin Dennhardt" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <!--Allows the module to be installed in a location defined by the module integrator-->
+      <Directory Id="INSTALLDIR" Name="." />
+    </Directory>
+
+    <!--The referenced ComponenGroups can be auto-generated (at least initially, not recommended to run as part of build) by
+    heat dir [project bin dir] -cg [project name] -o [installer project source dir]\[project name].wxs -srd -dr INSTALLDIR -var var.[project name].TargetDir-->
+    <ComponentGroupRef Id="IntroToWix" />
+    <ComponentGroupRef Id="SemirelatedExecutable" />
+  </Module>
+</Wix>

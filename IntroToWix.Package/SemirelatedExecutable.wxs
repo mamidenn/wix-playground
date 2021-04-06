@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR" />
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="SemirelatedExecutable">
+            <Component Id="cmp110FD576FE4305A6D643562349B4CB51" Directory="INSTALLDIR" Guid="{10AD59C8-18EF-49BE-A9B7-D2F891D8D85E}">
+                <File Id="fil66D7DC82317266505E4AD406E1590D8C" KeyPath="yes" Source="$(var.SemirelatedExecutable.TargetDir)\SemirelatedExecutable.exe" />
+            </Component>
+            <Component Id="cmpAE213FBC3BDB3A6C2C583E4E076F4435" Directory="INSTALLDIR" Guid="{FF54A8EE-7DA3-45FC-AAC4-EFCCF5A65315}">
+                <File Id="filD83890FB48E6DED65D275FDEF2A20BD6" KeyPath="yes" Source="$(var.SemirelatedExecutable.TargetDir)\SemirelatedExecutable.exe.config" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

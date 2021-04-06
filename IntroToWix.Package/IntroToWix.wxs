@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Fragment>
+    <DirectoryRef Id="INSTALLDIR" />
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="IntroToWix">
+      <Component Id="cmp581720539DA599D6A51B07A9CE4B87F5" Directory="INSTALLDIR" Guid="{55B1A814-5D1A-443D-A869-ACC1922D16DB}">
+        <!-- Assembly=".net" installs the .NET assembly in the GAC. This (among the usual upsides of using the GAC) allows inclusion from anywhere (useful for PowerShell) -->
+        <File Id="fil20645EB0811A1A999FB3EFC7FB55C7D7" KeyPath="yes" Source="$(var.IntroToWix.TargetDir)\IntroToWix.Common.dll" Assembly=".net" />
+      </Component>
+      <Component Id="cmp996281E1402AF932F0732EEF4F66C1E6" Directory="INSTALLDIR" Guid="{AF34F289-AE36-4876-B37E-4C59FEB9ACAA}">
+        <File Id="filC6C6ABEE8A0AF57A0204E8CF81DD68D7" KeyPath="yes" Source="$(var.IntroToWix.TargetDir)\IntroToWix.exe" >
+          <netfx:NativeImage Id="ngen_filC6C6AB" Platform="64bit" Priority="0" AppBaseDirectory="INSTALLDIR"/>
+        </File>
+        <File Id="fil64659D2966B6700E59948A4900EE09D3" Source="$(var.IntroToWix.TargetDir)\IntroToWix.exe.config" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
